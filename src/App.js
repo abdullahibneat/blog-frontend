@@ -36,6 +36,7 @@ const App = () => {
     const blogsContainer = () => (
         <div>
             <h2>blogs</h2>
+            <p>Hi {user.name}! <button onClick={event => setUser(null)}>logout</button></p>
             {blogs.map(blog =>
                 <Blog key={blog.id} blog={blog} />
             )}
