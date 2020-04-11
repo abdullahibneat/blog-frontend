@@ -14,6 +14,8 @@ const App = () => {
         blogService.getAll().then(blogs => setBlogs(blogs))
     }, [])
 
+    useEffect(() => window.localStorage.setItem("user", JSON.stringify(user)), [user])
+
     const handleLogin = async event => {
         event.preventDefault()
         try {
