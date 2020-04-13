@@ -4,6 +4,7 @@ import Notification from "./components/Notification"
 import blogService from "./services/blogs"
 import loginService from "./services/login"
 import LoginForm from "./components/LoginForm"
+import NewBlogForm from "./components/NewBlogForm"
 
 
 const App = () => {
@@ -66,15 +67,15 @@ const App = () => {
         onChangePassword={({ target }) => setPassword(target.value)}
     />
 
-    const addBlogForm = () => <>
-        <h2>Create new</h2>
-        <form onSubmit={handleNewBlog}>
-            <div>Title: <input type="text" name="title" value={newBlogTitle} onChange={ ({ target }) => setNewBlogTitle(target.value) } /></div>
-            <div>Author: <input type="text" name="author" value={newBlogAuthor} onChange={ ({ target }) => setNewBlogAuthor(target.value) } /></div>
-            <div>URL: <input type="text" name="url" value={newBlogURL} onChange={ ({ target }) => setNewBlogURL(target.value) } /></div>
-            <button type="submit">create</button>
-        </form>
-    </>
+    const addBlogForm = () => <NewBlogForm
+        onSubmitForm={handleNewBlog}
+        title={newBlogTitle}
+        onChangeTitle={({ target }) => setNewBlogTitle(target.value)}
+        author={newBlogAuthor}
+        onChangeAuthor={({ target }) => setNewBlogAuthor(target.value)}
+        URL={newBlogURL}
+        onChangeURL={({ target }) => setNewBlogURL(target.value)}
+    />
 
     const blogsContainer = () => (
         <div>
