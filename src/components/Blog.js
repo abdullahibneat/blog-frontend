@@ -13,7 +13,8 @@ const blogStyle = {
 const Blog = ({ blog, deleteBlog }) => {
     const [likes, setLikes] = useState(blog.likes)
     const id = blog.id
-    const username = JSON.parse(window.localStorage.getItem("user")).name
+    const cookie = JSON.parse(window.localStorage.getItem("user"))
+    const username = cookie? cookie.name : ""
 
     useEffect(() => {
         const update = async () => await axios.put(`/api/blogs/${id}`, { likes })
