@@ -15,10 +15,6 @@ const App = () => {
     const [user, setUser] = useState(JSON.parse(window.localStorage.getItem("user")))
     const [notification, setNotification] = useState(null)
 
-    const [newBlogTitle, setNewBlogTitle] = useState("")
-    const [newBlogAuthor, setNewBlogAuthor] = useState("")
-    const [newBlogURL, setNewBlogURL] = useState("")
-
     useEffect(() => {
         blogService.getAll().then(blogs => setBlogs(blogs))
     }, [])
@@ -41,20 +37,11 @@ const App = () => {
         }
     }
 
-    const handleNewBlog = async event => {
-        event.preventDefault()
+    const handleNewBlog = async newBlog => {
         try {
-            const newBlog = {
-                title: newBlogTitle,
-                author: newBlogAuthor,
-                url: newBlogURL
-            }
             const result = await blogService.create(newBlog, user.token)
             setBlogs(blogs.concat(result))
-            notify(`A new blog ${newBlogTitle} has been added.`)
-            setNewBlogTitle("")
-            setNewBlogAuthor("")
-            setNewBlogURL("")
+            notify(`A new blog ${newBlog.title} has been added.`)
         } catch(err) {
             notify(err.message)
         }
@@ -71,15 +58,7 @@ const App = () => {
     </Toggable>
 
     const addBlogForm = () => <Toggable buttonLabel="create">
-        <NewBlogForm
-            onSubmitForm={handleNewBlog}
-            title={newBlogTitle}
-            onChangeTitle={({ target }) => setNewBlogTitle(target.value)}
-            author={newBlogAuthor}
-            onChangeAuthor={({ target }) => setNewBlogAuthor(target.value)}
-            URL={newBlogURL}
-            onChangeURL={({ target }) => setNewBlogURL(target.value)}
-        />
+        <NewBlogForm onSubmitForm={handleNewBlog} />
     </Toggable>
 
     return (<>
