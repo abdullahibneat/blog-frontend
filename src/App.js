@@ -32,6 +32,8 @@ const App = () => {
         event.preventDefault()
         try {
             setUser(await loginService.login({ username, password }))
+            setUsername("")
+            setPassword("")
         } catch(err) {
             notify("Wrong credentials")
         }
