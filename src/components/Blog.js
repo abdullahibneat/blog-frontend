@@ -10,9 +10,10 @@ const blogStyle = {
 }
 
 
-const Blog = ({ blog }) => {
+const Blog = ({ blog, deleteBlog }) => {
     const [likes, setLikes] = useState(blog.likes)
     const id = blog.id
+    const username = JSON.parse(window.localStorage.getItem("user")).name
 
     useEffect(() => {
         const update = async () => await axios.put(`/api/blogs/${id}`, { likes })
@@ -24,6 +25,7 @@ const Blog = ({ blog }) => {
             <p>{blog.URL}</p>
             <p>likes {likes} <button onClick={() => setLikes(likes+1)}>like</button></p>
             <p>{blog.author}</p>
+            {username === blog.user.name? <button onClick={() => deleteBlog(blog)}>delete</button> : null}
         </Toggable>
     </div>
 }

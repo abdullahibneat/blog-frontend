@@ -47,6 +47,12 @@ const App = () => {
         }
     }
 
+    const deleteBlog = async blog => {
+        await blogService.deleteBlog(blog, user.token)
+        setBlogs(blogs.filter(b => b.id !== blog.id))
+        notify(`${blog.title} has been deleted`)
+    }
+
     const loginForm = () => <Toggable buttonLabel="login">
         <LoginForm
             onSubmitForm={handleLogin}
@@ -71,7 +77,7 @@ const App = () => {
                 {addBlogForm()}
             </div>
         }
-        {blogs.sort((a, b) => b.likes - a.likes).map(blog => <Blog key={blog.id} blog={blog} />)}
+        {blogs.sort((a, b) => b.likes - a.likes).map(blog => <Blog key={blog.id} blog={blog} deleteBlog={deleteBlog} />)}
     </>)
 }
 
