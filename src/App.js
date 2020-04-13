@@ -5,6 +5,7 @@ import blogService from "./services/blogs"
 import loginService from "./services/login"
 import LoginForm from "./components/LoginForm"
 import NewBlogForm from "./components/NewBlogForm"
+import Toggable from "./components/Toggable"
 
 
 const App = () => {
@@ -59,23 +60,27 @@ const App = () => {
         }
     }
 
-    const loginForm = () => <LoginForm
-        onSubmitForm={handleLogin}
-        username={username}
-        onChangeUsername={({ target }) => setUsername(target.value)}
-        password={password}
-        onChangePassword={({ target }) => setPassword(target.value)}
-    />
+    const loginForm = () => <Toggable buttonLabel="login">
+        <LoginForm
+            onSubmitForm={handleLogin}
+            username={username}
+            onChangeUsername={({ target }) => setUsername(target.value)}
+            password={password}
+            onChangePassword={({ target }) => setPassword(target.value)}
+        />
+    </Toggable>
 
-    const addBlogForm = () => <NewBlogForm
-        onSubmitForm={handleNewBlog}
-        title={newBlogTitle}
-        onChangeTitle={({ target }) => setNewBlogTitle(target.value)}
-        author={newBlogAuthor}
-        onChangeAuthor={({ target }) => setNewBlogAuthor(target.value)}
-        URL={newBlogURL}
-        onChangeURL={({ target }) => setNewBlogURL(target.value)}
-    />
+    const addBlogForm = () => <Toggable buttonLabel="create">
+        <NewBlogForm
+            onSubmitForm={handleNewBlog}
+            title={newBlogTitle}
+            onChangeTitle={({ target }) => setNewBlogTitle(target.value)}
+            author={newBlogAuthor}
+            onChangeAuthor={({ target }) => setNewBlogAuthor(target.value)}
+            URL={newBlogURL}
+            onChangeURL={({ target }) => setNewBlogURL(target.value)}
+        />
+    </Toggable>
 
     const blogsContainer = () => (
         <div>
