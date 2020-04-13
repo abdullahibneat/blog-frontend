@@ -1,5 +1,6 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import Toggable from "./Toggable"
+import axios from "axios"
 
 const blogStyle = {
     border: "solid",
@@ -8,14 +9,23 @@ const blogStyle = {
     padding: "0.5rem"
 }
 
-const Blog = ({ blog }) => (
-    <div style={blogStyle}>
-        {blog.title} <Toggable buttonLabel="view">
+
+const Blog = ({ blog }) => {
+    const [likes, setLikes] = useState(blog.likes)
+    const id = blog.id
+
+    useEffect(() => {
+        const update = async () => await axios.put(`/api/blogs/${id}`, { likes })
+        update()
+    }, [likes, id])
+
+    return <div style={blogStyle}>
+        <h4>{blog.title}</h4> <Toggable buttonLabel="view">
             <p>{blog.URL}</p>
-            <p>{blog.likes} <button>like</button></p>
+            <p>likes {likes} <button onClick={() => setLikes(likes+1)}>like</button></p>
             <p>{blog.author}</p>
         </Toggable>
     </div>
-)
+}
 
 export default Blog
