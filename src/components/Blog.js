@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import Toggable from "./Toggable"
 import axios from "axios"
+import PropTypes from "prop-types"
 
 const blogStyle = {
     border: "solid",
@@ -29,6 +30,11 @@ const Blog = ({ blog, deleteBlog }) => {
             {username === blog.user.name? <button onClick={() => deleteBlog(blog)}>delete</button> : null}
         </Toggable>
     </div>
+}
+
+Blog.propTypes = {
+    blog: PropTypes.object.isRequired,
+    deleteBlog: PropTypes.func.isRequired
 }
 
 export default Blog
