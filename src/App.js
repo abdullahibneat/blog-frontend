@@ -3,6 +3,7 @@ import Blog from "./components/Blog"
 import Notification from "./components/Notification"
 import blogService from "./services/blogs"
 import loginService from "./services/login"
+import LoginForm from "./components/LoginForm"
 
 
 const App = () => {
@@ -55,13 +56,13 @@ const App = () => {
         }
     }
 
-    const loginForm = () => (
-        <form onSubmit={handleLogin}>
-            <div>Username: <input type="text" value={username} name="username" onChange={ ({ target }) => setUsername(target.value) } /></div>
-            <div>Password: <input type="password" value={password} name="password" onChange={ ({ target }) => setPassword(target.value) } /></div>
-            <button type="submit">Login</button>
-        </form>
-    )
+    const loginForm = () => <LoginForm
+        onSubmitForm={handleLogin}
+        username={username}
+        onChangeUsername={({ target }) => setUsername(target.value)}
+        password={password}
+        onChangePassword={({ target }) => setPassword(target.value)}
+    />
 
     const addBlogForm = () => <>
         <h2>Create new</h2>
