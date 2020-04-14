@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import Toggable from "./Toggable"
-import axios from "axios"
 import PropTypes from "prop-types"
 
 const blogStyle = {
@@ -11,16 +10,15 @@ const blogStyle = {
 }
 
 
-const Blog = ({ blog, deleteBlog }) => {
+const Blog = ({ blog, deleteBlog, updateLikes }) => {
     const [likes, setLikes] = useState(blog.likes)
-    const id = blog.id
     const cookie = JSON.parse(window.localStorage.getItem("user"))
     const username = cookie? cookie.name : ""
 
     useEffect(() => {
-        const update = async () => await axios.put(`/api/blogs/${id}`, { likes })
-        update()
-    }, [likes, id])
+        blog.likes = likes
+        updateLikes(blog)
+    }, [likes, blog, updateLikes])
 
     return <div style={blogStyle}>
         <h4 className="blogTitle">{blog.title}</h4>
@@ -35,7 +33,8 @@ const Blog = ({ blog, deleteBlog }) => {
 
 Blog.propTypes = {
     blog: PropTypes.object.isRequired,
-    deleteBlog: PropTypes.func.isRequired
+    deleteBlog: PropTypes.func.isRequired,
+    updateLikes: PropTypes.func.isRequired
 }
 
 export default Blog

@@ -15,11 +15,12 @@ describe("<Blog />", () => {
         }
     }
     const deleteBlog = jest.fn()
+    const updateLikes = jest.fn()
 
     let component
 
     beforeEach(() => {
-        component = render(<Blog blog={blog} deleteBlog={deleteBlog} />)
+        component = render(<Blog blog={blog} deleteBlog={deleteBlog} updateLikes={updateLikes} />)
     })
 
     test("Initially only title and author are visible", () => {
