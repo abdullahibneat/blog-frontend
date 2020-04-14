@@ -48,9 +48,11 @@ const App = () => {
     }
 
     const deleteBlog = async blog => {
-        await blogService.deleteBlog(blog, user.token)
-        setBlogs(blogs.filter(b => b.id !== blog.id))
-        notify(`${blog.title} has been deleted`)
+        if(window.confirm(`Remove blog ${blog.title} by ${blog.author}?`)) {
+            await blogService.deleteBlog(blog, user.token)
+            setBlogs(blogs.filter(b => b.id !== blog.id))
+            notify(`${blog.title} has been deleted`)
+        }
     }
 
     const loginForm = () => <Toggable buttonLabel="login">
