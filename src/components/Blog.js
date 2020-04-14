@@ -23,10 +23,10 @@ const Blog = ({ blog, deleteBlog }) => {
     }, [likes, id])
 
     return <div style={blogStyle}>
-        <h4>{blog.title}</h4>
-        <p>by {blog.author}</p><Toggable buttonLabel="view">
-            <p>{blog.url}</p>
-            <p>likes {likes} <button onClick={() => setLikes(likes+1)}>like</button></p>
+        <h4 className="blogTitle">{blog.title}</h4>
+        <p>by <span className="blogAuthor">{blog.author}</span></p><Toggable buttonLabel="view">
+            <p className="blogURL">{blog.url}</p>
+            <p>likes <span className="blogLikes">{likes}</span> <button onClick={() => setLikes(likes+1)}>like</button></p>
             <p>Saved by {blog.user.name}</p>
             {username === blog.user.name? <button onClick={() => deleteBlog(blog)}>delete</button> : null}
         </Toggable>
