@@ -1,6 +1,6 @@
 import React from "react"
 import "@testing-library/jest-dom"
-import { render } from "@testing-library/react"
+import { render, fireEvent } from "@testing-library/react"
 import Blog from "../components/Blog"
 
 describe("<Blog />", () => {
@@ -27,5 +27,13 @@ describe("<Blog />", () => {
         expect(component.container.querySelector(".blogAuthor")).toBeVisible()
         expect(component.container.querySelector(".blogURL")).not.toBeVisible()
         expect(component.container.querySelector(".blogLikes")).not.toBeVisible()
+    })
+
+    test("After expanding a blog, URL and likes are visible", () => {
+        const expandButton = component.getByText("view")
+        fireEvent.click(expandButton)
+
+        expect(component.container.querySelector(".blogURL")).toBeVisible()
+        expect(component.container.querySelector(".blogLikes")).toBeVisible()
     })
 })
