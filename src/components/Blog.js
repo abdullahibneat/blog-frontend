@@ -25,7 +25,7 @@ const Blog = ({ blog, deleteBlog }) => {
     return <div style={blogStyle}>
         <h4>{blog.title}</h4>
         <p>by {blog.author}</p><Toggable buttonLabel="view">
-            <p>{blog.URL}</p>
+            <p>{blog.url}</p>
             <p>likes {likes} <button onClick={() => setLikes(likes+1)}>like</button></p>
             <p>Saved by {blog.user.name}</p>
             {username === blog.user.name? <button onClick={() => deleteBlog(blog)}>delete</button> : null}
