@@ -37,4 +37,12 @@ describe("<Blog />", () => {
         expect(component.container.querySelector(".blogURL")).toBeVisible()
         expect(component.container.querySelector(".blogLikes")).toBeVisible()
     })
+
+    test("Pressing the like button twice invokes updateLikes twice", () => {
+        const likeButton = component.getByText("like")
+        updateLikes.mockClear()
+        fireEvent.click(likeButton)
+        fireEvent.click(likeButton)
+        expect(updateLikes.mock.calls).toHaveLength(2)
+    })
 })
