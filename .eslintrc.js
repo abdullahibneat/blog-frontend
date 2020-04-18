@@ -1,7 +1,8 @@
 module.exports = {
 	"env": {
 		"browser": true,
-		"jest": true
+		"jest": true,
+		"cypress/globals": true
 	},
 	"extends": "eslint:recommended",
 	"globals": {
