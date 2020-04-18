@@ -26,7 +26,7 @@ describe("<NewNlogForm />", () => {
         const form = component.container.querySelector("form")
         const titleInput = component.container.querySelector("#newBlogTitle")
         const authorInput = component.container.querySelector("#newBlogAuthor")
-        const urlInput = component.container.querySelector("#newblogURL")
+        const urlInput = component.container.querySelector("#newBlogURL")
 
         fireEvent.change(titleInput, { target: { value: blog.title } })
         fireEvent.change(authorInput, { target: { value: blog.author } })
