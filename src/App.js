@@ -47,7 +47,10 @@ const App = () => {
         }
     }
 
-    const handleBlogLike = async blog => await blogService.updateLikes(blog)
+    const handleBlogLike = async blog => {
+        await blogService.updateLikes(blog)
+        setBlogs(blogs.filter(b => b.id !== blog.id).concat(blog)) 
+    }
 
     const deleteBlog = async blog => {
         if(window.confirm(`Remove blog ${blog.title} by ${blog.author}?`)) {

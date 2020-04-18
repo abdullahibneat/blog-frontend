@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import Toggable from "./Toggable"
 import PropTypes from "prop-types"
 
@@ -14,17 +14,18 @@ const Blog = ({ blog, deleteBlog, updateLikes }) => {
     const [likes, setLikes] = useState(blog.likes)
     const cookie = JSON.parse(window.localStorage.getItem("user"))
     const username = cookie? cookie.name : ""
-
-    useEffect(() => {
-        blog.likes = likes
+    
+    const handleLike = () => {
+        setLikes(likes+1)
+        blog.likes = blog.likes + 1
         updateLikes(blog)
-    }, [likes, blog, updateLikes])
+    }
 
     return <div style={blogStyle}>
         <h4 className="blogTitle">{blog.title}</h4>
         <p>by <span className="blogAuthor">{blog.author}</span></p><Toggable buttonLabel="view">
             <p className="blogURL">{blog.url}</p>
-            <p>likes <span className="blogLikes">{likes}</span> <button onClick={() => setLikes(likes+1)}>like</button></p>
+            <p>likes <span className="blogLikes">{likes}</span> <button onClick={handleLike}>like</button></p>
             <p>Saved by {blog.user.name}</p>
             {username === blog.user.name? <button onClick={() => deleteBlog(blog)}>delete</button> : null}
         </Toggable>
