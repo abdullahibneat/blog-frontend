@@ -8,6 +8,11 @@ describe("Blog app", () => {
             username: "user",
             password: "pass"
         })
+        cy.request("POST", "http://localhost:3002/api/users", { //Create another test user
+            name: "test2",
+            username: "user2",
+            password: "pass2"
+        })
         cy.visit("http://localhost:3000")
     })
 
@@ -56,6 +61,22 @@ describe("Blog app", () => {
             cy.get(".blogLikes").should("contain", "0")
             cy.contains("like").click()
             cy.get(".blogLikes").should("contain", "1")
+        })
+
+        it("User who created a blog can delete it", () => {
+            cy.newBlog({ title: "Blog saved by user", author: "John Doe", url: "google.com" })
+            cy.contains("view").click()
+            cy.contains("delete").click()
+            cy.get("#notificationMessage").should("contain", "Blog saved by user has been deleted")
+            cy.get(".blogTitle").should("not.exist")
+        })
+
+        it("Other users cannot delete others' blogs", () => {
+            cy.newBlog({ title: "Blog saved by user", author: "John Doe", url: "google.com" })
+            cy.contains("logout").click()
+            cy.login({ username: "user2", password: "pass2" })
+            cy.contains("view").click()
+            cy.contains("delete").should("not.exist")
         })
     })
 })
