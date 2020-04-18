@@ -33,4 +33,21 @@ describe("Blog app", () => {
             cy.get("#notificaitonMessage").should("be.visible").contains("Wrong credentials")
         })
     })
+
+    describe("When logged in", () => {
+        beforeEach(() => {
+            cy.login({ username: "user", password: "pass" })
+        })
+
+        it("A blog can be created", () => {
+            cy.contains("create").click()
+            cy.get("#newBlogTitle").type("My title")
+            cy.get("#newBlogAuthor").type("John Doe")
+            cy.get("#newblogURL").type("google.com")
+            cy.get("#newBlogForm").submit()
+            cy.get("#notificaitonMessage").contains("A new blog My title has been added.")
+            cy.get(".blogTitle").contains("My title")
+            cy.get(".blogAuthor").contains("John Doe")
+        })
+    })
 })
