@@ -49,5 +49,13 @@ describe("Blog app", () => {
             cy.get(".blogTitle").contains("My title")
             cy.get(".blogAuthor").contains("John Doe")
         })
+
+        it("A blog can be liked", () => {
+            cy.newBlog({ title: "Like this please", author: "John Doe", url: "bing.com" })
+            cy.contains("view").click()
+            cy.get(".blogLikes").should("contain", "0")
+            cy.contains("like").click()
+            cy.get(".blogLikes").should("contain", "1")
+        })
     })
 })
