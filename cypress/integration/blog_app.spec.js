@@ -15,4 +15,22 @@ describe("Blog app", () => {
         cy.contains("login").click()
         cy.get("#loginForm").should("be.visible")
     })
+
+    describe("Login", () => {
+        it("Succeeds with correct credentials", () => {
+            cy.contains("login").click()
+            cy.get("#loginFormUsername").type("user")
+            cy.get("#loginFormPassword").type("pass")
+            cy.get("#loginForm").submit()
+            cy.contains("Hi test!")
+        })
+
+        it("Fails with wrong credentials", () => {
+            cy.contains("login").click()
+            cy.get("#loginFormUsername").type("admin")
+            cy.get("#loginFormPassword").type("admin")
+            cy.get("#loginForm").submit()
+            cy.get("#notificaitonMessage").should("be.visible").contains("Wrong credentials")
+        })
+    })
 })
