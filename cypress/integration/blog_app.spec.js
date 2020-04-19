@@ -59,7 +59,7 @@ describe("Blog app", () => {
             cy.newBlog({ title: "Like this please", author: "John Doe", url: "bing.com" })
             cy.contains("view").click()
             cy.get(".blogLikes").should("contain", "0")
-            cy.contains("like").click()
+            cy.get("button").click()
             cy.get(".blogLikes").should("contain", "1")
         })
 
@@ -77,6 +77,30 @@ describe("Blog app", () => {
             cy.login({ username: "user2", password: "pass2" })
             cy.contains("view").click()
             cy.contains("delete").should("not.exist")
+        })
+    })
+
+    it("Blogs are displayed in order of likes", () => {
+        cy.login({ username: "user", password: "pass" })
+        cy.newBlog({ title: "Blog with 0 likes", author: "someone", url: "google.com" })
+
+        cy.newBlog({ title: "Blog with 1 likes", author: "someone", url: "google.com" })
+        cy.contains("Blog with 1 likes").parent().contains("view").click()
+        cy.contains("Blog with 1 likes").parent().find("#blogLikeButton").click()
+
+        cy.newBlog({ title: "Blog with 2 likes", author: "someone", url: "google.com" })
+        cy.contains("Blog with 2 likes").parent().contains("view").click()
+        cy.contains("Blog with 2 likes").parent().find("#blogLikeButton").click().click()
+
+        cy.newBlog({ title: "Blog with 3 likes", author: "someone", url: "google.com" })
+        cy.contains("Blog with 3 likes").parent().contains("view").click()
+        cy.contains("Blog with 3 likes").parent().find("#blogLikeButton").click().click().click()
+
+        let likes = 3
+
+        cy.get(".blog").each((el, index, list) => {
+            cy.wrap(el).find(".blogTitle").should("contain", likes)
+            likes-=1
         })
     })
 })
