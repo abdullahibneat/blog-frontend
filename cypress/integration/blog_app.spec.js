@@ -59,7 +59,7 @@ describe("Blog app", () => {
             cy.newBlog({ title: "Like this please", author: "John Doe", url: "bing.com" })
             cy.contains("view").click()
             cy.get(".blogLikes").should("contain", "0")
-            cy.get("button").click()
+            cy.get("#blogLikeButton").click()
             cy.get(".blogLikes").should("contain", "1")
         })
 
