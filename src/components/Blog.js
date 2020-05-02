@@ -15,7 +15,7 @@ const blogStyle = {
 const Blog = ({ blog }) => {
     const dispatch = useDispatch()
 
-    const username = useSelector(state => state.user.name)
+    const username = useSelector(state => state.user? state.user.name : null)
 
     const handleLike = () => {
         blog.likes = blog.likes + 1
