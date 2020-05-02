@@ -7,6 +7,7 @@ import NewBlogForm from "./components/NewBlogForm"
 import Toggable from "./components/Toggable"
 import { useSelector, useDispatch } from "react-redux"
 import { createBlog, like, deleteBlog } from "./reducers/blogReducer"
+import { setNotification } from "./reducers/notificationReducer"
 
 const App = () => {
     const blogs = useSelector(state => state.blogs)
@@ -15,14 +16,10 @@ const App = () => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [user, setUser] = useState(JSON.parse(window.localStorage.getItem("user")))
-    const [notification, setNotification] = useState(null)
 
     useEffect(() => window.localStorage.setItem("user", JSON.stringify(user)), [user])
 
-    const notify = message => {
-        setNotification(message)
-        setTimeout(() => setNotification(null), 5000)
-    }
+    const notify = message => dispatch(setNotification(message))
 
     const handleLogin = async event => {
         event.preventDefault()
@@ -71,7 +68,7 @@ const App = () => {
 
     return blogs
         ? (<>
-            <Notification message={notification} />
+            <Notification />
             <h2>blogs</h2>
             {user === null
                 ? loginForm()
