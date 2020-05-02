@@ -6,7 +6,7 @@ import LoginForm from "./components/LoginForm"
 import NewBlogForm from "./components/NewBlogForm"
 import Toggable from "./components/Toggable"
 import { useSelector, useDispatch } from "react-redux"
-import { createBlog, like, deleteBlog } from "./reducers/blogReducer"
+import { createBlog } from "./reducers/blogReducer"
 import { setNotification } from "./reducers/notificationReducer"
 
 const App = () => {
@@ -41,17 +41,6 @@ const App = () => {
         }
     }
 
-    const handleBlogLike = async blog => {
-        dispatch(like(blog))
-    }
-
-    const handleBlogDelete = async blog => {
-        if(window.confirm(`Remove blog ${blog.title} by ${blog.author}?`)) {
-            dispatch(deleteBlog(blog))
-            notify(`${blog.title} has been deleted`)
-        }
-    }
-
     const loginForm = () => <Toggable buttonLabel="login">
         <LoginForm
             onSubmitForm={handleLogin}
@@ -77,7 +66,7 @@ const App = () => {
                     {addBlogForm()}
                 </div>
             }
-            {blogs.sort((a, b) => b.likes - a.likes).map(blog => <Blog key={blog.id} blog={blog} updateLikes={handleBlogLike} deleteBlog={handleBlogDelete} />)}
+            {blogs.sort((a, b) => b.likes - a.likes).map(blog => <Blog key={blog.id} blog={blog} />)}
         </>)
         : null
 }
