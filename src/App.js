@@ -21,17 +21,15 @@ const App = () => {
     </Toggable>
 
     return <>
-            <Notification />
-            <h2>blogs</h2>
-            {user === null
-                ? loginForm()
-                : <div>
-                    <p>Hi {user.name}! <button onClick={() => dispatch(logout())}>logout</button></p>
-                    {addBlogForm()}
-                </div>
-            }
-            <BlogList />
-        </>
+        <Notification />
+        <h2>blogs</h2>
+        {!user && loginForm()}
+        {user && <div>
+            <p>Hi {user.name}! <button onClick={() => dispatch(logout())}>logout</button></p>
+            {addBlogForm()}
+        </div>}
+        <BlogList />
+    </>
 }
 
 export default App
