@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react"
 import Blog from "./components/Blog"
 import Notification from "./components/Notification"
-import blogService from "./services/blogs"
 import loginService from "./services/login"
 import LoginForm from "./components/LoginForm"
 import NewBlogForm from "./components/NewBlogForm"
 import Toggable from "./components/Toggable"
 import { useSelector, useDispatch } from "react-redux"
-import { createBlog, like } from "./reducers/blogReducer"
+import { createBlog, like, deleteBlog } from "./reducers/blogReducer"
 
 const App = () => {
     const blogs = useSelector(state => state.blogs)
@@ -49,10 +48,9 @@ const App = () => {
         dispatch(like(blog))
     }
 
-    const deleteBlog = async blog => {
+    const handleBlogDelete = async blog => {
         if(window.confirm(`Remove blog ${blog.title} by ${blog.author}?`)) {
-            await blogService.deleteBlog(blog, user.token)
-            // handle blog state after deletion
+            dispatch(deleteBlog(blog))
             notify(`${blog.title} has been deleted`)
         }
     }
@@ -82,7 +80,7 @@ const App = () => {
                     {addBlogForm()}
                 </div>
             }
-            {blogs.sort((a, b) => b.likes - a.likes).map(blog => <Blog key={blog.id} blog={blog} updateLikes={handleBlogLike} deleteBlog={deleteBlog} />)}
+            {blogs.sort((a, b) => b.likes - a.likes).map(blog => <Blog key={blog.id} blog={blog} updateLikes={handleBlogLike} deleteBlog={handleBlogDelete} />)}
         </>)
         : null
 }
