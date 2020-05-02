@@ -7,7 +7,7 @@ import LoginForm from "./components/LoginForm"
 import NewBlogForm from "./components/NewBlogForm"
 import Toggable from "./components/Toggable"
 import { useSelector, useDispatch } from "react-redux"
-import { createBlog } from "./reducers/blogReducer"
+import { createBlog, like } from "./reducers/blogReducer"
 
 const App = () => {
     const blogs = useSelector(state => state.blogs)
@@ -46,8 +46,7 @@ const App = () => {
     }
 
     const handleBlogLike = async blog => {
-        await blogService.updateLikes(blog)
-        // handle blog state after like
+        dispatch(like(blog))
     }
 
     const deleteBlog = async blog => {

@@ -9,7 +9,7 @@ const blogReducer = (state = [], action) => {
             return state.concat(action.data)
 
         case "LIKE":
-            return state // TODO: Handle like
+            return state.map(blog => blog.id === action.data.id? action.data : blog)
 
         case "DELETE":
             return state //TODO: Handle deletion
@@ -35,6 +35,16 @@ export const createBlog = blog => {
         dispatch({
             type: "CREATE",
             data
+        })
+    }
+}
+
+export const like = blog => {
+    return async dispatch => {
+        await blogService.updateLikes(blog)
+        dispatch({
+            type: "LIKE",
+            data: blog
         })
     }
 }
