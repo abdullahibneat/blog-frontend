@@ -5,6 +5,9 @@ const blogReducer = (state = [], action) => {
         case "INIT":
             return action.data
 
+        case "CREATE":            
+            return state.concat(action.data)
+
         case "LIKE":
             return state // TODO: Handle like
 
@@ -21,6 +24,17 @@ export const initializeBlogs = () => {
         const data = await blogService.getAll()
         dispatch({
             type: "INIT",
+            data
+        })
+    }
+}
+
+export const createBlog = blog => {
+    return async dispatch => {
+        const user = JSON.parse(window.localStorage.getItem("user"))
+        const data = await blogService.create(blog, user.token)
+        dispatch({
+            type: "CREATE",
             data
         })
     }

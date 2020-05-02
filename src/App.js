@@ -6,12 +6,12 @@ import loginService from "./services/login"
 import LoginForm from "./components/LoginForm"
 import NewBlogForm from "./components/NewBlogForm"
 import Toggable from "./components/Toggable"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+import { createBlog } from "./reducers/blogReducer"
 
 const App = () => {
     const blogs = useSelector(state => state)
-
-    const setBlogs = () => {} // Temporarily ignore setBlogs()
+    const dispatch = useDispatch()
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -38,8 +38,7 @@ const App = () => {
 
     const handleNewBlog = async newBlog => {
         try {
-            const result = await blogService.create(newBlog, user.token)
-            setBlogs(blogs.concat(result))
+            dispatch(createBlog(newBlog))
             notify(`A new blog ${newBlog.title} has been added.`)
         } catch(err) {
             notify(err.message)
@@ -48,13 +47,13 @@ const App = () => {
 
     const handleBlogLike = async blog => {
         await blogService.updateLikes(blog)
-        setBlogs(blogs.filter(b => b.id !== blog.id).concat(blog)) 
+        // handle blog state after like
     }
 
     const deleteBlog = async blog => {
         if(window.confirm(`Remove blog ${blog.title} by ${blog.author}?`)) {
             await blogService.deleteBlog(blog, user.token)
-            setBlogs(blogs.filter(b => b.id !== blog.id))
+            // handle blog state after deletion
             notify(`${blog.title} has been deleted`)
         }
     }
