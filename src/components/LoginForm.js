@@ -1,20 +1,31 @@
 import React from "react"
-import PropTypes from "prop-types"
+import { useDispatch } from "react-redux"
+import loginService from "../services/login"
+import { setNotification } from "../reducers/notificationReducer"
+import { loadUser } from "../reducers/userReducer"
 
-const LoginForm = ({ onSubmitForm, username, onChangeUsername, password, onChangePassword }) => <div>
-    <form id="loginForm" onSubmit={onSubmitForm}>
-        <div>Username: <input id="loginFormUsername" type="text" value={username} name="username" onChange={onChangeUsername} /></div>
-        <div>Password: <input id="loginFormPassword" type="password" value={password} name="password" onChange={onChangePassword} /></div>
-        <button type="submit">Login</button>
-    </form>
-</div>
+const LoginForm = () => {
+    const dispatch = useDispatch()
+    
+    const onSubmitForm = async event => {
+        event.preventDefault()
+        const username = event.target.username.value
+        const password = event.target.password.value
 
-LoginForm.propTypes = {
-    onSubmitForm: PropTypes.func.isRequired,
-    username: PropTypes.string.isRequired,
-    onChangeUsername: PropTypes.func.isRequired,
-    password: PropTypes.string.isRequired,
-    onChangePassword: PropTypes.func.isRequired
+        try {
+            dispatch(loadUser(await loginService.login({ username, password })))
+        } catch(err) {
+            dispatch(setNotification("Wrong credentials"))
+        }
+    }
+
+    return <div>
+        <form id="loginForm" onSubmit={onSubmitForm}>
+            <div>Username: <input id="loginFormUsername" type="text" name="username" /></div>
+            <div>Password: <input id="loginFormPassword" type="password" name="password" /></div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
 }
 
 export default LoginForm

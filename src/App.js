@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import Blog from "./components/Blog"
 import Notification from "./components/Notification"
-import loginService from "./services/login"
 import LoginForm from "./components/LoginForm"
 import NewBlogForm from "./components/NewBlogForm"
 import Toggable from "./components/Toggable"
@@ -11,26 +10,12 @@ import { setNotification } from "./reducers/notificationReducer"
 
 const App = () => {
     const blogs = useSelector(state => state.blogs)
+    const user = useSelector(state => state.user)
     const dispatch = useDispatch()
 
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
-    const [user, setUser] = useState(JSON.parse(window.localStorage.getItem("user")))
-
-    useEffect(() => window.localStorage.setItem("user", JSON.stringify(user)), [user])
+    const setUser = () => {} // TODO: Allow user to log out
 
     const notify = message => dispatch(setNotification(message))
-
-    const handleLogin = async event => {
-        event.preventDefault()
-        try {
-            setUser(await loginService.login({ username, password }))
-            setUsername("")
-            setPassword("")
-        } catch(err) {
-            notify("Wrong credentials")
-        }
-    }
 
     const handleNewBlog = async newBlog => {
         try {
@@ -42,13 +27,7 @@ const App = () => {
     }
 
     const loginForm = () => <Toggable buttonLabel="login">
-        <LoginForm
-            onSubmitForm={handleLogin}
-            username={username}
-            onChangeUsername={({ target }) => setUsername(target.value)}
-            password={password}
-            onChangePassword={({ target }) => setPassword(target.value)}
-        />
+        <LoginForm />
     </Toggable>
 
     const addBlogForm = () => <Toggable buttonLabel="create">
