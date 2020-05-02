@@ -30,9 +30,8 @@ export const initializeBlogs = () => {
 }
 
 export const createBlog = blog => {
-    return async dispatch => {
-        const user = JSON.parse(window.localStorage.getItem("user"))
-        const data = await blogService.create(blog, user.token)
+    return async (dispatch, getState) => {
+        const data = await blogService.create(blog, getState().user.token)
         dispatch({
             type: "CREATE",
             data
