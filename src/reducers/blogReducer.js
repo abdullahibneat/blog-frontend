@@ -15,7 +15,7 @@ const blogReducer = (state = [], action) => {
             return state //TODO: Handle deletion
     
         default:
-            break;
+            return state;
     }
 }
 
