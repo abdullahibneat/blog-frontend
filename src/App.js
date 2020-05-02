@@ -1,13 +1,12 @@
 import React from "react"
-import Blog from "./components/Blog"
 import Notification from "./components/Notification"
 import LoginForm from "./components/LoginForm"
 import NewBlogForm from "./components/NewBlogForm"
 import Toggable from "./components/Toggable"
 import { useSelector } from "react-redux"
+import BlogList from "./components/BlogList"
 
 const App = () => {
-    const blogs = useSelector(state => state.blogs)
     const user = useSelector(state => state.user)
 
     const setUser = () => {} // TODO: Allow user to log out
@@ -20,8 +19,7 @@ const App = () => {
         <NewBlogForm />
     </Toggable>
 
-    return blogs
-        ? (<>
+    return <>
             <Notification />
             <h2>blogs</h2>
             {user === null
@@ -31,9 +29,8 @@ const App = () => {
                     {addBlogForm()}
                 </div>
             }
-            {blogs.sort((a, b) => b.likes - a.likes).map(blog => <Blog key={blog.id} blog={blog} />)}
-        </>)
-        : null
+            <BlogList />
+        </>
 }
 
 export default App
