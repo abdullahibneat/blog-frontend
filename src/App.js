@@ -3,13 +3,14 @@ import Notification from "./components/Notification"
 import LoginForm from "./components/LoginForm"
 import NewBlogForm from "./components/NewBlogForm"
 import Toggable from "./components/Toggable"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import BlogList from "./components/BlogList"
+import { logout } from "./reducers/userReducer"
 
 const App = () => {
     const user = useSelector(state => state.user)
 
-    const setUser = () => {} // TODO: Allow user to log out
+    const dispatch = useDispatch()
 
     const loginForm = () => <Toggable buttonLabel="login">
         <LoginForm />
@@ -25,7 +26,7 @@ const App = () => {
             {user === null
                 ? loginForm()
                 : <div>
-                    <p>Hi {user.name}! <button onClick={() => { setUser(null); window.localStorage.clear() }}>logout</button></p>
+                    <p>Hi {user.name}! <button onClick={() => dispatch(logout())}>logout</button></p>
                     {addBlogForm()}
                 </div>
             }

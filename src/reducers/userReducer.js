@@ -9,9 +9,20 @@ const userReducer = (state = null, action) => {
 }
 
 export const loadUser = user => {
+    return dispatch => {
+        dispatch({
+            type: "LOAD",
+            data: user
+        })
+        window.localStorage.setItem("user", JSON.stringify(user))
+    }
+}
+
+export const logout = () => {
+    window.localStorage.removeItem("user")
     return dispatch => dispatch({
         type: "LOAD",
-        data: user
+        data: null
     })
 }
 
