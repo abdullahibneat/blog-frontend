@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { createBlog } from "./reducers/blogReducer"
 
 const App = () => {
-    const blogs = useSelector(state => state)
+    const blogs = useSelector(state => state.blogs)
     const dispatch = useDispatch()
 
     const [username, setUsername] = useState("")
