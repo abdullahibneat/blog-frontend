@@ -10,16 +10,18 @@ const UsersList = () => {
 
     return users
     ? <table>
-        <tr>
-            <th>Name</th>
-            <th>Blogs created</th>
-        </tr>
-        {users.map(u =>
+        <tbody>
             <tr>
-                <td>{u.name}</td>
-                <td>{u.blogs.length}</td>
+                <th>Name</th>
+                <th>Blogs created</th>
             </tr>
-        )}
+            {users.map(u =>
+                <tr key={u.id}>
+                    <td>{u.name}</td>
+                    <td>{u.blogs.length}</td>
+                </tr>
+            )}
+        </tbody>
     </table>
     : null
 }
