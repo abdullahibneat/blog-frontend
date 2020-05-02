@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux"
 import BlogList from "./components/BlogList"
 import { logout } from "./reducers/userReducer"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import UsersList from "./components/UsersList"
 
 const App = () => {
     const user = useSelector(state => state.user)
@@ -28,6 +29,9 @@ const App = () => {
             {!user && loginForm()}
             {user && <p>Hi {user.name}! <button onClick={() => dispatch(logout())}>logout</button></p>}
             <Switch>
+                <Route path="/users">
+                    <UsersList />
+                </Route>
                 <Route path="/">
                     {user && addBlogForm()}
                     <BlogList />
