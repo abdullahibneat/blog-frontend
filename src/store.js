@@ -1,9 +1,6 @@
 import { createStore } from "redux";
+import blogReducer from "./reducers/blogReducer";
 
-const reducer = (state = 0, action) => {
-    return state
-}
-
-const store = createStore(reducer)
+const store = createStore(blogReducer)
 
 export default store
