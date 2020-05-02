@@ -1,3 +1,5 @@
+import blogService from "../services/blogs"
+
 const blogReducer = (state = [], action) => {
     switch (action.type) {
         case "INIT":
@@ -11,6 +13,16 @@ const blogReducer = (state = [], action) => {
     
         default:
             break;
+    }
+}
+
+export const initializeBlogs = () => {
+    return async dispatch => {
+        const data = await blogService.getAll()
+        dispatch({
+            type: "INIT",
+            data
+        })
     }
 }
 
