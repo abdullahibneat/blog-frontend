@@ -4,34 +4,20 @@ import Notification from "./components/Notification"
 import LoginForm from "./components/LoginForm"
 import NewBlogForm from "./components/NewBlogForm"
 import Toggable from "./components/Toggable"
-import { useSelector, useDispatch } from "react-redux"
-import { createBlog } from "./reducers/blogReducer"
-import { setNotification } from "./reducers/notificationReducer"
+import { useSelector } from "react-redux"
 
 const App = () => {
     const blogs = useSelector(state => state.blogs)
     const user = useSelector(state => state.user)
-    const dispatch = useDispatch()
 
     const setUser = () => {} // TODO: Allow user to log out
-
-    const notify = message => dispatch(setNotification(message))
-
-    const handleNewBlog = async newBlog => {
-        try {
-            dispatch(createBlog(newBlog))
-            notify(`A new blog ${newBlog.title} has been added.`)
-        } catch(err) {
-            notify(err.message)
-        }
-    }
 
     const loginForm = () => <Toggable buttonLabel="login">
         <LoginForm />
     </Toggable>
 
     const addBlogForm = () => <Toggable buttonLabel="create">
-        <NewBlogForm onSubmitForm={handleNewBlog} />
+        <NewBlogForm />
     </Toggable>
 
     return blogs
