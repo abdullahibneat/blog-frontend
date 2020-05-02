@@ -6,18 +6,17 @@ import loginService from "./services/login"
 import LoginForm from "./components/LoginForm"
 import NewBlogForm from "./components/NewBlogForm"
 import Toggable from "./components/Toggable"
-
+import { useSelector } from "react-redux"
 
 const App = () => {
-    const [blogs, setBlogs] = useState([])
+    const blogs = useSelector(state => state)
+
+    const setBlogs = () => {} // Temporarily ignore setBlogs()
+
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [user, setUser] = useState(JSON.parse(window.localStorage.getItem("user")))
     const [notification, setNotification] = useState(null)
-
-    useEffect(() => {
-        blogService.getAll().then(blogs => setBlogs(blogs))
-    }, [])
 
     useEffect(() => window.localStorage.setItem("user", JSON.stringify(user)), [user])
 
@@ -74,18 +73,20 @@ const App = () => {
         <NewBlogForm onSubmitForm={handleNewBlog} />
     </Toggable>
 
-    return (<>
-        <Notification message={notification} />
-        <h2>blogs</h2>
-        {user === null
-            ? loginForm()
-            : <div>
-                <p>Hi {user.name}! <button onClick={() => { setUser(null); window.localStorage.clear() }}>logout</button></p>
-                {addBlogForm()}
-            </div>
-        }
-        {blogs.sort((a, b) => b.likes - a.likes).map(blog => <Blog key={blog.id} blog={blog} updateLikes={handleBlogLike} deleteBlog={deleteBlog} />)}
-    </>)
+    return blogs
+        ? (<>
+            <Notification message={notification} />
+            <h2>blogs</h2>
+            {user === null
+                ? loginForm()
+                : <div>
+                    <p>Hi {user.name}! <button onClick={() => { setUser(null); window.localStorage.clear() }}>logout</button></p>
+                    {addBlogForm()}
+                </div>
+            }
+            {blogs.sort((a, b) => b.likes - a.likes).map(blog => <Blog key={blog.id} blog={blog} updateLikes={handleBlogLike} deleteBlog={deleteBlog} />)}
+        </>)
+        : null
 }
 
 export default App
