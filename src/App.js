@@ -9,6 +9,7 @@ import { logout } from "./reducers/userReducer"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import UsersList from "./components/UsersList"
 import User from "./components/User"
+import Blog from "./components/Blog"
 
 const App = () => {
     const user = useSelector(state => state.user)
@@ -32,6 +33,9 @@ const App = () => {
             <Switch>
                 <Route path="/users/:id">
                     <User />
+                </Route>
+                <Route path="/blogs/:id">
+                    <Blog />
                 </Route>
                 <Route path="/users">
                     <UsersList />
