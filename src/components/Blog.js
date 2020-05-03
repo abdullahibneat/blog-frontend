@@ -31,10 +31,19 @@ const Blog = () => {
         ? <div className="blog">
             <h4 className="blogTitle">{blog.title}</h4>
             <p>by <span className="blogAuthor">{blog.author}</span></p>
-                <p className="blogURL">{blog.url}</p>
-                <p>likes <span className="blogLikes">{blog.likes}</span> <button id="blogLikeButton" onClick={handleLike}>like</button></p>
-                <p>Saved by {blog.user.name}</p>
-                {username === blog.user.name ? <button onClick={handleDelete}>delete</button> : null}
+            <p className="blogURL">{blog.url}</p>
+            <p>likes <span className="blogLikes">{blog.likes}</span> <button id="blogLikeButton" onClick={handleLike}>like</button></p>
+            <p>Saved by {blog.user.name}</p>
+            {username === blog.user.name ? <button onClick={handleDelete}>delete</button> : null}
+
+            <h4>Commnets</h4>
+            {blog.comments.length > 0
+            ? <ul>
+                {blog.comments.map(c =>
+                    <li key={c.id}>{c.comment}</li>
+                )}
+            </ul>
+            : <p>no comments</p>}
         </div>
         : <h4>Blog not found</h4>
 }
