@@ -2,7 +2,7 @@ import React from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { deleteBlog, like } from "../reducers/blogReducer"
 import { setNotification } from "../reducers/notificationReducer"
-import { useParams } from "react-router-dom"
+import { useParams, useHistory } from "react-router-dom"
 
 const Blog = () => {
     const id = useParams().id
@@ -10,6 +10,7 @@ const Blog = () => {
         .find(b => b.id === id)
 
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const username = useSelector(state => state.user? state.user.name : null)
 
@@ -22,6 +23,7 @@ const Blog = () => {
         if (window.confirm(`Remove blog ${blog.title} by ${blog.author}?`)) {
             dispatch(deleteBlog(blog))
             dispatch(setNotification(`${blog.title} has been deleted`))
+            history.push("/")
         }
     }
 
