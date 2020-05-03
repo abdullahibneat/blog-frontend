@@ -10,6 +10,7 @@ import User from "./components/User"
 import Blog from "./components/Blog"
 import Navigation from "./components/Navigaton"
 import LoginForm from "./components/LoginForm"
+import "@blueprintjs/core/lib/css/blueprint.css"
 
 const App = () => {
     const user = useSelector(state => state.user)
@@ -22,7 +23,6 @@ const App = () => {
         <Router>
             <Notification />
             <Navigation />
-            <h2>blogs</h2>
 
             <Switch>
                 <Route path="/users/:id">
@@ -38,9 +38,12 @@ const App = () => {
                     {!user && <LoginForm />}
                     {user && <Redirect to="/" />}
                 </Route>
-                <Route path="/">
+                <Route path="/blogs">
                     {user && addBlogForm()}
                     <BlogList />
+                </Route>
+                <Route path="/">
+                    <div>Hello world!</div>
                 </Route>
             </Switch>
         </Router>
