@@ -8,6 +8,7 @@ import BlogList from "./components/BlogList"
 import { logout } from "./reducers/userReducer"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import UsersList from "./components/UsersList"
+import User from "./components/User"
 
 const App = () => {
     const user = useSelector(state => state.user)
@@ -29,6 +30,9 @@ const App = () => {
             {!user && loginForm()}
             {user && <p>Hi {user.name}! <button onClick={() => dispatch(logout())}>logout</button></p>}
             <Switch>
+                <Route path="/users/:id">
+                    <User />
+                </Route>
                 <Route path="/users">
                     <UsersList />
                 </Route>
