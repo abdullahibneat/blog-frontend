@@ -1,6 +1,6 @@
 import React from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { deleteBlog, like } from "../reducers/blogReducer"
+import { deleteBlog, updateBlog } from "../reducers/blogReducer"
 import { setNotification } from "../reducers/notificationReducer"
 import { useParams, useHistory } from "react-router-dom"
 
@@ -16,7 +16,7 @@ const Blog = () => {
 
     const handleLike = () => {
         blog.likes = blog.likes + 1
-        dispatch(like(blog))
+        dispatch(updateBlog(blog))
     }
 
     const handleDelete = () => {
