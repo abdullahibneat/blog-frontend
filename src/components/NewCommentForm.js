@@ -11,8 +11,10 @@ const NewCommentForm = () => {
 
     const handleSubmit = event => {
         event.preventDefault()
+        event.persist()
         blogService.comment(id, event.target.comment.value)
             .then(blog => dispatch(updateBlog(blog)))
+            .then(_ => event.target.reset())
             .catch(err => dispatch(setNotification("Comment cannot be empty")))
     }
 

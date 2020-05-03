@@ -8,6 +8,7 @@ const NewBlogForm = () => {
 
     const handleNewBlog = event => {
         event.preventDefault()
+        event.persist()
         const blog = {
             title: event.target.title.value,
             author: event.target.author.value,
@@ -16,6 +17,7 @@ const NewBlogForm = () => {
         try {
             dispatch(createBlog(blog))
             dispatch(setNotification(`A new blog ${blog.title} has been added.`))
+            event.target.reset()
         } catch(err) {
             dispatch(setNotification(err.message))
         }
