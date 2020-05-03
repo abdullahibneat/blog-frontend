@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { deleteBlog, updateBlog } from "../reducers/blogReducer"
 import { setNotification } from "../reducers/notificationReducer"
 import { useParams, useHistory } from "react-router-dom"
+import NewCommentForm from "./NewCommentForm"
 
 const Blog = () => {
     const id = useParams().id
@@ -37,6 +38,7 @@ const Blog = () => {
             {username === blog.user.name ? <button onClick={handleDelete}>delete</button> : null}
 
             <h4>Commnets</h4>
+            <NewCommentForm />
             {blog.comments.length > 0
             ? <ul>
                 {blog.comments.map(c =>
