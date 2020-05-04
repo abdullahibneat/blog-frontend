@@ -1,5 +1,4 @@
 import React from "react"
-import Notification from "./components/Notification"
 import NewBlogForm from "./components/NewBlogForm"
 import Toggable from "./components/Toggable"
 import { useSelector } from "react-redux"
@@ -27,7 +26,6 @@ const App = () => {
     return <>
         <Router>
             <Navigation />
-            <Notification />
 
             <div className="container" style={style}>
                 <Switch>
