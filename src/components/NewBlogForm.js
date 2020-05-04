@@ -15,13 +15,10 @@ const NewBlogForm = () => {
             author: event.target.author.value,
             url: event.target.url.value
         }
-        try {
-            dispatch(createBlog(blog))
+        dispatch(createBlog(blog)).then(_ => {
             dispatch(setNotification(`A new blog ${blog.title} has been added.`))
             event.target.reset()
-        } catch(err) {
-            dispatch(setNotification(err.message))
-        }
+        }).catch(err => dispatch(setNotification(err.response.data.error)))
     }
 
     return <div>
