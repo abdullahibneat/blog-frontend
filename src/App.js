@@ -15,37 +15,50 @@ import "@blueprintjs/core/lib/css/blueprint.css"
 const App = () => {
     const user = useSelector(state => state.user)
 
-    const addBlogForm = () => <Toggable buttonLabel="create">
+    const addBlogForm = () => <Toggable buttonLabel="Create">
         <NewBlogForm />
     </Toggable>
 
+    const style = {
+        margin: "3em auto auto auto",
+        maxWidth: "50em"
+    }
+
     return <>
         <Router>
-            <Notification />
             <Navigation />
+            <Notification />
 
-            <Switch>
-                <Route path="/users/:id">
-                    <User />
-                </Route>
-                <Route path="/blogs/:id">
-                    <Blog />
-                </Route>
-                <Route path="/users">
-                    <UsersList />
-                </Route>
-                <Route path="/login">
-                    {!user && <LoginForm />}
-                    {user && <Redirect to="/" />}
-                </Route>
-                <Route path="/blogs">
-                    {user && addBlogForm()}
-                    <BlogList />
-                </Route>
-                <Route path="/">
-                    <div>Hello world!</div>
-                </Route>
-            </Switch>
+            <div className="container" style={style}>
+                <Switch>
+                    <Route path="/users/:id">
+                        <User />
+                    </Route>
+                    <Route path="/blogs/:id">
+                        <Blog />
+                    </Route>
+                    <Route path="/users">
+                        <h1>Users</h1>
+                        <UsersList />
+                    </Route>
+                    <Route path="/login">
+                        <h1>Login</h1>
+                        {!user && <LoginForm />}
+                        {user && <Redirect to="/" />}
+                    </Route>
+                    <Route path="/blogs">
+                        <h1>All blogs</h1>
+                        {user && addBlogForm()}
+                        <BlogList />
+                    </Route>
+                    <Route path="/">
+                        <div>
+                            <h1>Blog application</h1>
+                            <p>An application built using React and NodeJS.</p>
+                        </div>
+                    </Route>
+                </Switch>
+            </div>
         </Router>
     </>
 }

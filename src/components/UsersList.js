@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import userService from "../services/user"
 import { Link } from "react-router-dom"
+import { HTMLTable } from "@blueprintjs/core";
 
 const UsersList = () => {
     const [users, setUsers] = useState([])
@@ -10,12 +11,14 @@ const UsersList = () => {
     }, [])
 
     return users
-    ? <table>
-        <tbody>
+    ? <HTMLTable striped={true} style={{ width: "100%" }}>
+        <thead>
             <tr>
                 <th>Name</th>
                 <th>Blogs created</th>
             </tr>
+        </thead>
+        <tbody>
             {users.map(u =>
                 <tr key={u.id}>
                     <td><Link to={`/users/${u.id}`}>{u.name}</Link></td>
@@ -23,7 +26,7 @@ const UsersList = () => {
                 </tr>
             )}
         </tbody>
-    </table>
+    </HTMLTable>
     : null
 }
 

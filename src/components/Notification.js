@@ -1,15 +1,14 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useSelector } from "react-redux"
+import { Toast, Toaster } from "@blueprintjs/core";
 
 const Notification = () => {
     const message = useSelector(state => state.notification)
 
-    return (message === null? null :
-        <><div id="notification" style={{ borderStyle: "dashed" }}>
-            <p id="notificationMessage" align="center">{message}</p>
-        </div></>
-    )
+    return <Toaster>
+        {message? <Toast message={message} /> : null}
+    </Toaster>
 }
 
 Notification.propTypes = {

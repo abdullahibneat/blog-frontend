@@ -2,6 +2,7 @@ import React from "react"
 import { useDispatch } from "react-redux"
 import { setNotification } from "../reducers/notificationReducer"
 import { createBlog } from "../reducers/blogReducer"
+import { FormGroup, InputGroup, Button } from "@blueprintjs/core"
 
 const NewBlogForm = () => {
     const dispatch = useDispatch()
@@ -24,12 +25,18 @@ const NewBlogForm = () => {
     }
 
     return <div>
-        <h2>Create new</h2>
+        <h2 style={{ marginTop: 0 }}>Create new entry</h2>
         <form id="newBlogForm" onSubmit={handleNewBlog}>
-            <div>Title: <input type="text" id="newBlogTitle" name="title" /></div>
-            <div>Author: <input type="text" id="newBlogAuthor" name="author" /></div>
-            <div>URL: <input type="text" id="newBlogURL" name="url" /></div>
-            <button type="submit">create</button>
+            <FormGroup label="Title" labelFor="newBlogTitle" labelInfo="(required)">
+                <InputGroup name="title" id="newBlogTitle" placeholder="An interesting article" />
+            </FormGroup>
+            <FormGroup label="Author" labelFor="newBlogAuthor" labelInfo="(required)">
+                <InputGroup name="author" id="newBlogAuthor" placeholder="John Smith" />
+            </FormGroup>
+            <FormGroup label="URL" labelFor="newBlogURL" labelInfo="(required)">
+                <InputGroup name="url" id="newBlogURL" placeholder="www.example.com" />
+            </FormGroup>
+            <Button className="bp3-intent-primary" icon="add" text="Add" type="submit" />
         </form>
     </div>
 }

@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux"
 import blogService from "../services/blogs"
 import { updateBlog } from "../reducers/blogReducer"
 import { setNotification } from "../reducers/notificationReducer"
+import { FormGroup, Button, TextArea } from "@blueprintjs/core"
 
 const NewCommentForm = () => {
     const id = useParams().id
@@ -20,7 +21,10 @@ const NewCommentForm = () => {
 
     return <div>
         <form onSubmit={handleSubmit}>
-            <input name="comment" /> <button>add comment</button>
+            <FormGroup labelFor="comment">
+                <TextArea style={{ width: "60%" }} id="comment" name="comment" placeholder="Leave a comment. E.g. Thanks for sharing this article!" />
+            </FormGroup>
+            <Button icon="chat" text="Comment" type="submit" />
         </form>
     </div>
 }
