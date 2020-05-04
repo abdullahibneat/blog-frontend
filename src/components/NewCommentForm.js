@@ -16,7 +16,7 @@ const NewCommentForm = () => {
         blogService.comment(id, event.target.comment.value)
             .then(blog => dispatch(updateBlog(blog)))
             .then(_ => event.target.reset())
-            .catch(err => dispatch(setNotification("Comment cannot be empty")))
+            .catch(err => dispatch(setNotification("Comment cannot be empty", "ERROR")))
     }
 
     return <div>

@@ -16,7 +16,7 @@ const LoginForm = () => {
         try {
             dispatch(loadUser(await loginService.login({ username, password })))
         } catch(err) {
-            dispatch(setNotification("Wrong credentials"))
+            dispatch(setNotification("Wrong credentials", "ERROR"))
         }
     }
 

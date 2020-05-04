@@ -25,7 +25,7 @@ const Blog = () => {
 
     const handleDelete = () => {
         dispatch(deleteBlog(blog))
-        dispatch(setNotification(`${blog.title} has been deleted`))
+        dispatch(setNotification(`${blog.title} has been deleted`, "SUCCESS"))
         history.push("/blogs")
     }
 

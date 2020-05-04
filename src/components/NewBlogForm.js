@@ -16,9 +16,9 @@ const NewBlogForm = () => {
             url: event.target.url.value
         }
         dispatch(createBlog(blog)).then(_ => {
-            dispatch(setNotification(`A new blog ${blog.title} has been added.`))
+            dispatch(setNotification(`A new blog ${blog.title} has been added.`, "SUCCESS"))
             event.target.reset()
-        }).catch(err => dispatch(setNotification(err.response.data.error)))
+        }).catch(err => dispatch(setNotification(err.response.data.error, "ERROR")))
     }
 
     return <div>
