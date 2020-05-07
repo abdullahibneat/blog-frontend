@@ -29,6 +29,11 @@ To deploy to vercel:
 - Redux (state management)
 - Cypress (end-to-end testing)
 
+## Running Cypress testing
+1. Make sure you're running the backend locally, use `npm run test` and set the `MONGODB_TEST_URI` in the `.env` file
+2. Run the frontend: `REACT_APP_BASE_URL=http://localhost:3002 npm start`
+3. Finally, run the Cypress tests: `npm run cypress`
+
 ## Redux store
 
 The Redux store is defined in `/src/store.js`. The following reducers are used:
