@@ -16,7 +16,7 @@ const Navigation = () => {
             <AnchorButton className="bp3-minimal" icon="user" text="Users" href="/users" />
         </Navbar.Group>
         <Navbar.Group align={Alignment.RIGHT}>
-            {!user && <AnchorButton rightIcon="log-in" text="Login" href="/login" />}
+            {!user && <><AnchorButton rightIcon="new-person" text="Register" href="/register" /> <Navbar.Divider /> <AnchorButton rightIcon="log-in" text="Login" href="/login" /></>}
             {user && <>Hi {user.name}! <Navbar.Divider /> <AnchorButton rightIcon="log-out" text="Logout" onClick={() => dispatch(logout())} /></>}
         </Navbar.Group>
     </Navbar>
