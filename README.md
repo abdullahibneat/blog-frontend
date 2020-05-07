@@ -13,6 +13,10 @@ It can be seen in action at the following address: [https://blog-frontend.abdull
 
 During development, running the backend locally is not necessary. Instead, you can run `REACT_APP_BASE_URL=https://blog-backend.abdullahibneat.now.sh npm start` to start the application.
 
+## Building for production
+
+Remeber to include the environment variable while building, e.g. `REACT_APP_BASE_URL=https://blog-backend.abdullahibneat.now.sh npm build`
+
 ## Environment variables
 
 During development there is no need to set any environment variable. Instead, run the server from [https://github.com/abdullahibneat/blog-backend](https://github.com/abdullahibneat/blog-backend)
