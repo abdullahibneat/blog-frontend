@@ -1,3 +1,5 @@
+import { setNotification } from "./notificationReducer"
+
 const userReducer = (state = null, action) => {
     switch (action.type) {
         case "LOAD":
@@ -20,10 +22,13 @@ export const loadUser = user => {
 
 export const logout = () => {
     window.localStorage.removeItem("user")
-    return dispatch => dispatch({
-        type: "LOAD",
-        data: null
-    })
+    return dispatch => {
+        dispatch({
+            type: "LOAD",
+            data: null
+        })
+        dispatch(setNotification("You've logged out successfully.", "SUCCESS"))
+    }
 }
 
 export default userReducer
