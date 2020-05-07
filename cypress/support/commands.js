@@ -13,5 +13,5 @@ Cypress.Commands.add("newBlog", ({ title, author, url }) => {
         body: { title, author, url },
         headers: { "Authorization": JSON.parse(localStorage.getItem("user")).token }
     })
-    cy.visit("http://localhost:3000")
+    cy.visit("http://localhost:3000/blogs")
 })
