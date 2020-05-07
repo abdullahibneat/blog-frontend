@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from "react"
 import userService from "../services/user"
 import { Link } from "react-router-dom"
-import { HTMLTable } from "@blueprintjs/core";
+import { HTMLTable, Spinner } from "@blueprintjs/core";
 
 const UsersList = () => {
     const [users, setUsers] = useState([])
+    const [isLoading, setLoading] = useState(true)
 
     useEffect(() => {
-        userService.getAll().then(u => setUsers(u))
+        userService.getAll().then(u => {
+            setUsers(u)
+            setLoading(false)
+        })
     }, [])
 
-    return users
+    return users.length > 0
     ? <HTMLTable striped={true} style={{ width: "100%" }}>
         <thead>
             <tr>
@@ -27,7 +31,9 @@ const UsersList = () => {
             )}
         </tbody>
     </HTMLTable>
-    : null
+    : isLoading
+        ? <Spinner />
+        : <h4>No users found</h4>
 }
 
 export default UsersList

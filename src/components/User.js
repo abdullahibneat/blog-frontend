@@ -2,18 +2,21 @@ import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import userService from "../services/user"
 import BlogCard from "./BlogCard"
+import { Spinner } from "@blueprintjs/core"
 
 const User = () => {
+    const [isLoading, setLoading] = useState(true)
+
     const id = useParams().id
 
     const [user, setUser] = useState(null)
 
     useEffect(() => {
         userService.getByID(id)
-            .then(u => setUser(u))
-            .catch(err => setUser({
-                name: "User does not exists"
-            }))
+            .then(u => {
+                setUser(u)
+            })
+            .catch(() => setLoading(false))
     }, [id])
 
     const blogsContainer = {
@@ -35,7 +38,9 @@ const User = () => {
                 : <p>This user has not added any blog yet.</p>}
             </div>}
         </div>
-        : null
+        : isLoading
+            ? <Spinner />
+            : <h4>User not found</h4>
 }
 
 export default User

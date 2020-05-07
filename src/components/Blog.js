@@ -4,14 +4,20 @@ import { deleteBlog, updateBlog } from "../reducers/blogReducer"
 import { setNotification } from "../reducers/notificationReducer"
 import { useParams, useHistory } from "react-router-dom"
 import NewCommentForm from "./NewCommentForm"
-import { Tag, AnchorButton, Alert, Intent, Callout, Icon } from "@blueprintjs/core"
+import { Tag, AnchorButton, Alert, Intent, Callout, Icon, Spinner } from "@blueprintjs/core"
 
 const Blog = () => {
     const [isOpen, setOpen] = useState(false)
+    const [isLoading, setLoading] = useState(true)
 
     const id = useParams().id
     const blog = useSelector(state => state.blogs)
         .find(b => b.id === id)
+
+    // Show spinner for up to 5 seconds while finding blog
+    if(!blog) setTimeout(() => {
+        setLoading(false)
+    }, 5000)
 
     const dispatch = useDispatch()
     const history = useHistory()
@@ -55,7 +61,9 @@ const Blog = () => {
             </div>
             : <p style={{ marginTop: "1em" }}>Be the first to leave a comment!</p>}
         </div>
-        : <h4>Blog not found</h4>
+        : isLoading
+            ? <Spinner />
+            : <h4>Blog not found</h4>
 }
 
 export default Blog
