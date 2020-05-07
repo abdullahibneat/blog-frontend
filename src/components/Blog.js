@@ -15,8 +15,8 @@ const Blog = () => {
         .find(b => b.id === id)
 
     // Show spinner for up to 5 seconds while finding blog
-    if(!blog) setTimeout(() => {
-        setLoading(false)
+    setTimeout(() => {
+        if(!blog) setLoading(false)
     }, 5000)
 
     const dispatch = useDispatch()
@@ -55,7 +55,7 @@ const Blog = () => {
             <NewCommentForm />
             {blog.comments.length > 0
             ? <div>
-                {blog.comments.map(c =>
+                {blog.comments.slice().reverse().map(c =>
                     <Callout className="comment" key={c.id}>{c.comment}</Callout>
                 )}
             </div>
