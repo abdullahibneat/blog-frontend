@@ -28,7 +28,7 @@ const RegisterForm = () => {
     }
 
     return <div>
-        <form id="registerForm" style={{width: "40%" }} onSubmit={onSubmitForm}>
+        <form id="registerForm" onSubmit={onSubmitForm}>
             <FormGroup label="Name" labelFor="registerFormName" labelInfo="(required)">
                 <InputGroup name="name" id="registerFormName" placeholder="Name" />
             </FormGroup>

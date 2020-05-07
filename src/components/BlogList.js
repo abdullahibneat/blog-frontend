@@ -14,14 +14,8 @@ const BlogList = () => {
         setLoading(false)
     }, 5000)
 
-    const blogsContainer = {
-        display: "flex",
-        flexWrap: "wrap",
-        marginTop: "2em"
-    }
-
     return blogs.length > 0
-        ? <div style={blogsContainer}>
+        ? <div className="blogContainer">
             {blogs.sort(byLikes)
                 .map(blog =>
                     <BlogCard key={blog.id} blog={blog} />

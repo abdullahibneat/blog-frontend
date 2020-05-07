@@ -22,7 +22,7 @@ const NewCommentForm = () => {
     return <div>
         <form onSubmit={handleSubmit}>
             <FormGroup labelFor="comment">
-                <TextArea style={{ width: "60%" }} id="comment" name="comment" placeholder="Leave a comment. E.g. Thanks for sharing this article!" />
+                <TextArea id="comment" name="comment" placeholder="Leave a comment. E.g. Thanks for sharing this article!" />
             </FormGroup>
             <Button icon="chat" text="Comment" type="submit" />
         </form>

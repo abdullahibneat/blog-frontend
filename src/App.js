@@ -19,16 +19,11 @@ const App = () => {
         <NewBlogForm />
     </Toggable>
 
-    const style = {
-        margin: "3em auto auto auto",
-        maxWidth: "50em"
-    }
-
     return <>
         <Router>
             <Navigation />
 
-            <div className="container" style={style}>
+            <div className="container">
                 <Switch>
                     <Route path="/users/:id">
                         <User />

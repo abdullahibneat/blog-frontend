@@ -15,7 +15,7 @@ const UsersList = () => {
     }, [])
 
     return users.length > 0
-    ? <HTMLTable striped={true} style={{ width: "100%" }}>
+    ? <HTMLTable striped={true}>
         <thead>
             <tr>
                 <th>Name</th>

@@ -56,7 +56,7 @@ const Blog = () => {
             {blog.comments.length > 0
             ? <div>
                 {blog.comments.map(c =>
-                    <Callout style={{ width: "fit-content", margin: "1em 0" }} key={c.id}>{c.comment}</Callout>
+                    <Callout className="comment" key={c.id}>{c.comment}</Callout>
                 )}
             </div>
             : <p style={{ marginTop: "1em" }}>Be the first to leave a comment!</p>}

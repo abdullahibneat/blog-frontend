@@ -22,7 +22,7 @@ const LoginForm = () => {
     }
 
     return <div>
-        <form id="loginForm" style={{width: "40%" }} onSubmit={onSubmitForm}>
+        <form id="loginForm" onSubmit={onSubmitForm}>
             <FormGroup label="Username" labelFor="loginFormUsername" labelInfo="(required)">
                 <InputGroup name="username" id="loginFormUsername" placeholder="Username" />
             </FormGroup>
