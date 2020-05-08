@@ -23,6 +23,8 @@
 
 .comment {
 	width: fit-content;
+	max-width: 100%;
+	word-break: break-word;
 	margin: 1em 0;
 }
 
