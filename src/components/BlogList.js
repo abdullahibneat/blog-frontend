@@ -9,10 +9,10 @@ const BlogList = () => {
 
     const byLikes = (a, b) => b.likes - a.likes
 
-    // Show spinner for up to 5 seconds while fetching blogs
+    // Show spinner for up to 10 seconds while fetching blogs
     if(blogs.length === 0) setTimeout(() => {
         setLoading(false)
-    }, 5000)
+    }, 10000)
 
     return blogs.length > 0
         ? <div className="blogContainer">

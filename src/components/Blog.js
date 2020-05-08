@@ -14,10 +14,10 @@ const Blog = () => {
     const blog = useSelector(state => state.blogs)
         .find(b => b.id === id)
 
-    // Show spinner for up to 5 seconds while finding blog
+    // Show spinner for up to 10 seconds while finding blog
     setTimeout(() => {
         if(!blog) setLoading(false)
-    }, 5000)
+    }, 10000)
 
     const dispatch = useDispatch()
     const history = useHistory()
