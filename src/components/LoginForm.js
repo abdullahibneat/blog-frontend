@@ -1,12 +1,18 @@
-import React from "react"
+import React, { useState } from "react"
 import { useDispatch } from "react-redux"
 import loginService from "../services/login"
 import { setNotification } from "../reducers/notificationReducer"
 import { loadUser } from "../reducers/userReducer"
-import { FormGroup, Button, InputGroup } from "@blueprintjs/core"
+import { FormGroup, Button, InputGroup, Tooltip } from "@blueprintjs/core"
 
 const LoginForm = () => {
+    const [showPassword, setShowPassword] = useState(false)
+
     const dispatch = useDispatch()
+
+    const lockButton = <Tooltip content={`${showPassword? "Hide" : "Show"} password`}>
+        <Button icon={showPassword? "eye-off" : "eye-open"} minimal={true} onClick={() => setShowPassword(!showPassword)} />
+    </Tooltip>
     
     const onSubmitForm = async event => {
         event.preventDefault()
@@ -27,7 +33,7 @@ const LoginForm = () => {
                 <InputGroup name="username" id="loginFormUsername" placeholder="Username" />
             </FormGroup>
             <FormGroup label="Password" labelFor="loginFormPassword" labelInfo="(required)">
-                <InputGroup type="password" name="password" id="loginFormPassword" placeholder="Password" />
+                <InputGroup type={showPassword? "text" : "password"} name="password" rightElement={lockButton} id="loginFormPassword" placeholder="Password" />
             </FormGroup>
             <Button rightIcon="log-in" text="Login" type="submit" />
         </form>
