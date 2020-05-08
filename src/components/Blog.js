@@ -39,7 +39,7 @@ const Blog = () => {
         ? <div className="blog">
             <h1 className="blogTitle">{blog.title}</h1>
             <p>by <span className="blogAuthor"><b>{blog.author}</b></span></p>
-            <p><a className="blogURL" href={blog.url} target="_blank" rel="noopener noreferrer">{blog.url}</a></p>
+            <p><a className="blogURL" href={(blog.url.startsWith("http")? "" : "//") + blog.url} target="_blank" rel="noopener noreferrer">{blog.url}</a></p>
             <Tag className="blogLikes" large={true} minimal={true} interactive={true} onClick={handleLike} rightIcon="heart">{blog.likes} likes</Tag>
             <p style={{ marginTop: "1em" }}>Saved by <Icon icon="user"/> {blog.user.name}</p>
             {username === blog.user.name ? <AnchorButton className="bp3-intent-danger" text="Delete" onClick={() => setOpen(true)}/> : null}
