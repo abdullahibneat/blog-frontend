@@ -39,12 +39,16 @@ textarea {
 		display: block;
 	}
 
+	#comment { /* Comment text area */
+		width: 40%;
+	}
+
 	.container {
         margin: 3em auto auto auto;
 		max-width: 50em
 	}
 
-	form {
+	.bp3-input-group {
 		width: 40%;
 	}
 }
