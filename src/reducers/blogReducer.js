@@ -41,10 +41,10 @@ export const createBlog = blog => {
 
 export const updateBlog = blog => {
     return async dispatch => {
-        await blogService.updateLikes(blog)
+        const updatedBlog = await blogService.updateLikes(blog)
         dispatch({
             type: "UPDATE",
-            data: blog
+            data: updatedBlog
         })
     }
 }

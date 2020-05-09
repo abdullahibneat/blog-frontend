@@ -26,6 +26,9 @@ const comment = async (id, comment) => {
     return result.data
 }
 
-const updateLikes = async blog => await axios.put(`${baseUrl}/${blog.id}`, { likes: blog.likes })
+const updateLikes = async blog => {
+    const result = await axios.put(`${baseUrl}/${blog.id}`, { likes: blog.likes })
+    return result.data
+}
 
 export default { getAll, create, deleteBlog, comment, updateLikes }
