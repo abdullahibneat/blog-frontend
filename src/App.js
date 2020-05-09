@@ -14,6 +14,10 @@ import RegisterForm from "./components/RegisterForm"
 
 const App = () => {
     const user = useSelector(state => state.user)
+    const darkMode = useSelector(state => state.darkMode)
+
+    if(darkMode) document.body.classList.add("bp3-dark")
+    else document.body.classList.remove("bp3-dark")
 
     const addBlogForm = () => <Toggable buttonLabel="Create">
         <NewBlogForm />

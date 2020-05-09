@@ -1,3 +1,11 @@
+body {
+	margin: 0;
+}
+
+body.bp3-dark {
+	background-color: #30404d;
+}
+
 .bp3-navbar .bp3-button-text {
 	display: none;
 }
