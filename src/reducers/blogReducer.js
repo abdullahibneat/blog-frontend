@@ -5,7 +5,7 @@ const blogReducer = (state = [], action) => {
         case "INIT":
             return action.data
 
-        case "CREATE":            
+        case "CREATE":
             return state.concat(action.data)
 
         case "UPDATE":
@@ -13,9 +13,9 @@ const blogReducer = (state = [], action) => {
 
         case "DELETE":
             return state.filter(blog => blog.id !== action.data)
-    
+
         default:
-            return state;
+            return state
     }
 }
 

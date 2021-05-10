@@ -13,7 +13,7 @@ const LoginForm = () => {
     const lockButton = <Tooltip content={`${showPassword? "Hide" : "Show"} password`}>
         <Button icon={showPassword? "eye-off" : "eye-open"} minimal={true} onClick={() => setShowPassword(!showPassword)} />
     </Tooltip>
-    
+
     const onSubmitForm = async event => {
         event.preventDefault()
         const username = event.target.username.value

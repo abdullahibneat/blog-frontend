@@ -10,9 +10,8 @@ const initialState = {
 const notificationReducer = (state = initialState, action) => {
     switch (action.type) {
         case "SET":
-            const newState = action.data
-            toaster.show(newState) // Display the notification
-            return newState
+            toaster.show(action.data) // Display the notification
+            return action.data
 
         default:
             return state
@@ -26,15 +25,15 @@ export const setNotification = (message, level = "NORMAL") => {
         switch (level) {
             case "ERROR":
                 intent = Intent.DANGER
-                break;
+                break
 
             case "SUCCESS":
                 intent = Intent.SUCCESS
-                break;
-        
+                break
+
             default:
                 intent = Intent.NONE
-                break;
+                break
         }
 
         dispatch({

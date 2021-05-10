@@ -1,9 +1,9 @@
-import { createStore, applyMiddleware, combineReducers } from "redux";
-import blogReducer, { initializeBlogs } from "./reducers/blogReducer";
-import userReducer, { loadUser } from "./reducers/userReducer";
-import thunk from "redux-thunk";
-import notificationReducer from "./reducers/notificationReducer";
-import darkModeReducer, { loadDarkMode } from "./reducers/darkModeReducer";
+import { createStore, applyMiddleware, combineReducers } from "redux"
+import blogReducer, { initializeBlogs } from "./reducers/blogReducer"
+import userReducer, { loadUser } from "./reducers/userReducer"
+import thunk from "redux-thunk"
+import notificationReducer from "./reducers/notificationReducer"
+import darkModeReducer, { loadDarkMode } from "./reducers/darkModeReducer"
 
 const reducer = combineReducers({
     blogs: blogReducer,

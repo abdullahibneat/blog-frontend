@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import userService from "../services/user"
 import { Link } from "react-router-dom"
-import { HTMLTable, Spinner } from "@blueprintjs/core";
+import { HTMLTable, Spinner } from "@blueprintjs/core"
 
 const UsersList = () => {
     const [users, setUsers] = useState([])

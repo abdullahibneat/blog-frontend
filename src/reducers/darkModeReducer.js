@@ -6,7 +6,7 @@ const darkModeReducer = (state = true, action) => {
             localStorage.setItem("dark", !state)
             return !state
         default:
-            return state;
+            return state
     }
 }
 
