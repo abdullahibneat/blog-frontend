@@ -25,9 +25,6 @@ During development there is no need to set any environment variable. Instead, ru
 |--|--|
 |REACT_APP_BASE_URL|Address to the backend *without the ending forward slash* (e.g. REACT_APP_BASE_URL="https://blog-backend.abdullahibneat.now.sh"|
 
-To deploy to vercel:
-- `now secrets add blog-frontend-api-url https://blog-backend.abdullahibneat.now.sh`
-
 ## Technologies used
 - React-router
 - Redux (state management)
