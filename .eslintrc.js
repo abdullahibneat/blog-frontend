@@ -4,6 +4,9 @@ module.exports = {
 		"jest": true,
 		"cypress/globals": true
 	},
+	"plugins": [
+		"cypress"
+	],
 	"extends": "eslint:recommended",
 	"globals": {
 		"Atomics": "readonly",
